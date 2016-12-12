@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/moviedfixed.iml" filepath="$PROJECT_DIR$/.idea/moviedfixed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../moviedreact/.idea/moviedreact.iml" filepath="$PROJECT_DIR$/../moviedreact/.idea/moviedreact.iml" />
     </modules>
   </component>
 </project>

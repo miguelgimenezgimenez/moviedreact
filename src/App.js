@@ -1,14 +1,11 @@
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 import AppBar from 'material-ui/AppBar';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {amber800,black,grey100,grey900} from 'material-ui/styles/colors';
-
+import {amber800, black, grey100, grey900} from 'material-ui/styles/colors';
+import Movielist from './Movielist';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -19,20 +16,18 @@ const muiTheme = getMuiTheme({
     color: black,
   },
 });
-
 class App extends Component {
   render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
           <AppBar title="Movied"/>
-          <div style={{padding:24}}>
-            {/* … Your code here … */}
+          <div style={{padding: 24}}>
+            <Movielist></Movielist>
           </div>
         </div>
       </MuiThemeProvider>
     );
   }
 }
-
 export default App;

@@ -1,49 +1,40 @@
-import React, { Component} from 'react';
-const imgURL  ="https://image.tmdb.org/t/p/w300";
+import React, {Component} from 'react';
+const imgURL = "https://image.tmdb.org/t/p/w300";
+import MovieContainer from './MovieContainer';
+import './Movielist.css';
 
-
-
-
-class Movielist extends Component{
-
-  constructor(){
+class Movielist extends Component {
+  constructor () {
     super();
     this.state = {
       movies: [],
     };
   }
-  componentDidMount(){
+
+  componentDidMount () {
     fetch(`https://movied.herokuapp.com/discover`)
       .then(response =>
         response.json()
       )
       .then(data =>
-        data.map((movie) => {
-          const path = `${imgURL}${movie.poster_path}`;
-          return <img src={path} alt=""/>
-        }))
-      .then(imagePath=>
         this.setState({
-            movies :imagePath,
-          }
-        )
+          movies: data
+        })
       )
   }
 
-  render() {
+  renderMovies() {
+    return this.state.movies.map(movie =>
+      <MovieContainer imgPath={`${imgURL}${movie.poster_path}`} key={movie.id}
+      movieId = {movie.id}/>)
+  }
+
+  render () {
     return (
-      <div>{this.state.movies}  </div>
+      <div className="container">
+        {this.renderMovies()}
+      </div>
     )
   }
 }
-
-
-class movieContainer extends Component {
-
-  render() {
-
-  }
-}
-
-
 export default Movielist;

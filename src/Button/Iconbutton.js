@@ -10,8 +10,7 @@ class Iconbutton extends Component {
     return (
       <div className = "btncontainer" >
         < button  className = "btnmovie"
-                  ref = {this.props.movieId}
-                  onClick = {() => (this.props.onClick(this.refs))} > SEEN </button>
+                  onClick = {() => (this.props.onClick())} > SEEN </button>
       </div>
     );
   }

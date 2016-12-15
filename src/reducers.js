@@ -15,18 +15,22 @@ const movies = (state={},action) => {
       return newState;
 
 
-    case 'FILTER_MOVIES':
-      console.log(state);
-
-      for (let movie in state) {
-
-        if (state[movie].original_title.includes(action.searchQuery.target.value)) {
-        }
-      }
-
     default:
       return state;
   }
+};
+
+const filter = (state= '',action)=> {
+
+  switch (action.type) {
+    case 'FILTER_MOVIES':
+      return action.searchQuery.target.value;
+
+    default:
+      return state
+  }
+
+
 };
 
 
@@ -34,7 +38,7 @@ const movies = (state={},action) => {
 // Combining both reducers
 const reducers = combineReducers({
   movies,
-
+  filter,
 });
 
 export default reducers;

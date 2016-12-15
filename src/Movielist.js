@@ -12,6 +12,7 @@ class Movielist extends Component {
 
 
   renderMovies() {
+    console.log('render');
     const imgURL = "https://image.tmdb.org/t/p/w300";
 
     const moviearray = [];
@@ -39,18 +40,34 @@ class Movielist extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-});
+
+
+
+const mapStateToProps = (state) => {
+  console.log(state.filter);
+
+  let filteredMovies = {};
+  const movies = state.movies;
+  if (state.filter.length>0){
+    for(let movie in movies) {
+      console.log((movies[movie].original_title.indexOf(state.filter) >= 0));
+      console.log((movies[movie].original_title), 'title');
+      if (movies[movie].original_title.toLowerCase().indexOf(state.filter.toLocaleLowerCase())>=0) {
+        filteredMovies[movie]= (state.movies[movie]);
+      }
+    }
+  } else {
+    filteredMovies = state.movies;
+  }
+  return ({
+    movies: filteredMovies,
+  })
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  // Map your dispatch actions
   fetchMovies: () => dispatch(fetchMovies()),
   toggleSeen: (movieId) => dispatch(toggleSeen(movieId)),
 
-  // decrement: () => dispatch(decrement()),
-  // addTodo: (text) => dispatch(addTodo(text)),
-  // toggleCompleted: (id) => dispatch(toggleCompleted(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movielist);

@@ -11,7 +11,7 @@ class SearchComponent extends Component {
   render () {
     return (
       <div>
-        <input type="text" placeholder="Search..." onKeyPress={this.props.filterMovies}/>
+        <input type="text" placeholder="Search..." onChange={this.props.filterMovies}/>
       </div>
     );
   }
@@ -23,13 +23,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // Map your dispatch actions
   filterMovies: (search) => dispatch(filterMovies(search))
 
 
-  // decrement: () => dispatch(decrement()),
-  // addTodo: (text) => dispatch(addTodo(text)),
-  // toggleCompleted: (id) => dispatch(toggleCompleted(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);

@@ -8,9 +8,9 @@ class Iconbutton extends Component {
 
   render() {
     return (
-      <div className = "btncontainer" >
-        < button  className = "btnmovie"
-                  onClick = {() => (this.props.onClick())} > SEEN </button>
+      <div className="btncontainer" >
+        < button  className="btnmovie"
+                  onClick={() => (this.props.onClick())} > SEEN </button>
       </div>
     );
   }

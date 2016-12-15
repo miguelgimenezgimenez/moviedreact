@@ -6,16 +6,24 @@ import './MovieContainer.css';
 import IconButton from './Button/Iconbutton';
 
 class MovieContainer extends Component {
-
-
+  handleOnClick = () => {
+    this.props.handleClick(this.props.movieId)
+  };
 
   render () {
     let myclass;
-    {this.props.seen ? myclass = "shadow movie-container" : myclass = 'movie-container'}
+    {this.props.seen ? myclass="shadow movie-container" : myclass='movie-container'}
     return (
-      <div className= {myclass}>
+      <div className={myclass}>
         <img src={this.props.imgPath} alt=""/>
-        {this.props.seen? null : <IconButton movieId={this.props.movieId} onClick = {() => this.props.handleClick(this.props.movieId)}> </IconButton>}
+        {
+          this.props.seen
+            ? null
+            : <IconButton
+                movieId={this.props.movieId}
+                onClick={ this.handleOnClick }
+            />
+        }
       </div>
     );
   }

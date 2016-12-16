@@ -1,25 +1,6 @@
-export const fetchMovies = () => function (dispatch) {
-
-  fetch(`https://movied.herokuapp.com/discover`)
-    .then(response =>
-      response.json()
-    )
-    .then(data => {
-        const myMovies = {};
-        for (let movie in data) {
-          data[movie].seen = false;
-          myMovies[data[movie].id] = data[movie];
-        }
-        dispatch(addMovies(myMovies));
-      }
-    );
-};
-
-
- const addMovies = (movies) => ({
+export const addMovies = (movies) => ({
   type: 'ADD_MOVIES',
-  movies:movies
-
+  movies,
 });
 
 
@@ -34,5 +15,21 @@ export const toggleSeen= (movieId) => ({
 export const filterMovies= (searchQuery) => ({
   type:'FILTER_MOVIES',
   searchQuery:searchQuery
+
+});
+
+
+export const filterByCategories = (url) => ({
+  type: 'MOVIES_BY_CATEGORY',
+  url,
+  success:addMovies
+
+
+});
+export const discover = (url) => ({
+  type: 'DISCOVER',
+  url,
+  success:addMovies
+
 
 });

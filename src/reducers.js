@@ -5,8 +5,15 @@ import { combineReducers } from 'redux';
 const movies = (state={},action) => {
 
   switch (action.type) {
+
     case 'ADD_MOVIES':
-      return Object.assign({}, state, action.movies);
+      const myMovies = {};
+      for (let element in action.movies) {
+        action.movies[element].seen = false;
+        myMovies[action.movies[element].id] = action.movies[element];
+      }
+
+      return Object.assign({}, state, myMovies);
 
     case 'TOGGLE_SEEN':
 
@@ -20,8 +27,9 @@ const movies = (state={},action) => {
   }
 };
 
-const filter = (state= '',action)=> {
 
+
+const filter = (state= '',action)=> {
   switch (action.type) {
     case 'FILTER_MOVIES':
       return action.searchQuery.target.value;
@@ -29,8 +37,21 @@ const filter = (state= '',action)=> {
     default:
       return state
   }
+};
 
 
+const status = (state = 'OK', action) => {
+  switch (action.type) {
+    case 'ADD_MOVIES':
+      return 'OK';
+    case 'LOADING_MOVIE':
+      console.log('loadingmovie');
+      return 'LOADING';
+    case 'ERROR':
+      return 'ERROR';
+    default:
+      return state
+  }
 };
 
 
@@ -39,6 +60,7 @@ const filter = (state= '',action)=> {
 const reducers = combineReducers({
   movies,
   filter,
+  status
 });
 
 export default reducers;

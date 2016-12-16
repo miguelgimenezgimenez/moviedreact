@@ -1,18 +1,16 @@
 import React, {Component} from "react";
 import MovieContainer from "./MovieContainer";
 import "./Movielist.css";
-import {fetchMovies, toggleSeen} from './actions';
+import { toggleSeen, discover} from './actions';
 import {connect} from 'react-redux';
 
 class Movielist extends Component {
 
   componentDidMount () {
-    this.props.fetchMovies();
+    this.props.discover(`https://movied.herokuapp.com/discover`);
   }
 
-
   renderMovies() {
-    console.log('render');
     const imgURL = "https://image.tmdb.org/t/p/w300";
 
     const moviearray = [];
@@ -45,7 +43,6 @@ class Movielist extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log(state.filter);
 
   let filteredMovies = {};
   const movies = state.movies;
@@ -64,9 +61,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: () => dispatch(fetchMovies()),
+  discover: (url,success) => dispatch(discover(url,success)),
   toggleSeen: (movieId) => dispatch(toggleSeen(movieId)),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movielist);

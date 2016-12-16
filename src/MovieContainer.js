@@ -3,7 +3,7 @@ import React, {
   PropTypes,
 } from 'react';
 import './MovieContainer.css';
-import IconButton from './Button/Iconbutton';
+import IconButton from './Components/Iconbutton';
 
 class MovieContainer extends Component {
   handleOnClick = () => {

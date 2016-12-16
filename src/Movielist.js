@@ -20,7 +20,8 @@ class Movielist extends Component {
       let seen = localStorage.getItem(this.props.movies[movie].id)|| this.props.movies[movie].seen;
       moviearray.push([this.props.movies[movie].poster_path,
         this.props.movies[movie].id,
-        seen]);          }
+        seen]);
+    }
 
     return moviearray.map(movie =>
       <MovieContainer imgPath={`${imgURL}${movie[0]}`} key={movie[1]}
@@ -50,8 +51,6 @@ const mapStateToProps = (state) => {
   const movies = state.movies;
   if (state.filter.length>0){
     for(let movie in movies) {
-      console.log((movies[movie].original_title.indexOf(state.filter) >= 0));
-      console.log((movies[movie].original_title), 'title');
       if (movies[movie].original_title.toLowerCase().indexOf(state.filter.toLocaleLowerCase())>=0) {
         filteredMovies[movie]= (state.movies[movie]);
       }

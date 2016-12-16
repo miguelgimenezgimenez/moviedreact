@@ -1,4 +1,5 @@
 export const fetchMovies = () => function (dispatch) {
+
   fetch(`https://movied.herokuapp.com/discover`)
     .then(response =>
       response.json()

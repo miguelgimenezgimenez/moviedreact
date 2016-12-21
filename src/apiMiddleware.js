@@ -5,7 +5,6 @@ function createApiMiddleware (extraArgument) {
       getState = store.getState;
     return function (next) {
       return function (action) {
-        console.log(action);
         if (action.hasOwnProperty('url')) {
           next({type: 'LOADING_MOVIE'});
           return myFetch(dispatch, action.url, action.success);

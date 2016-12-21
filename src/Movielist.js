@@ -3,6 +3,7 @@ import MovieContainer from "./MovieContainer";
 import "./Movielist.css";
 import { toggleSeen, discover} from './actions';
 import {connect} from 'react-redux';
+import { Router, Route, Link, browserHistory } from 'react-router'
 
 class Movielist extends Component {
 
@@ -21,12 +22,19 @@ class Movielist extends Component {
         seen]);
     }
 
-    return moviearray.map(movie =>
-      <MovieContainer imgPath={`${imgURL}${movie[0]}`} key={movie[1]}
-                      movieId={movie[1]}
-                      handleClick={()=>this.props.toggleSeen(movie[1])}
-                      seen={movie[2]}
-      />);
+    return moviearray.map(movie =>(
+      <div>
+        <Link to={`/Movie${movie[0]}`}>
+        <MovieContainer imgPath={`${imgURL}${movie[0]}`} key={movie[1]}
+                        movieId={movie[1]}
+                        handleClick={()=>this.props.toggleSeen(movie[1])}
+                        seen={movie[2]}  />
+      </Link>
+  </div>
+  )
+  );
+
+
   }
 
 

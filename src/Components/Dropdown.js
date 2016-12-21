@@ -3,12 +3,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import {connect} from 'react-redux';
 
-export default class PopoverExampleAnimation extends React.Component {
+import {filterByCategories} from '../actions';
 
-  constructor(props) {
+class PopoverExampleAnimation extends React.Component {
+  constructor (props) {
     super(props);
-
     this.state = {
       open: false,
     };
@@ -17,25 +18,23 @@ export default class PopoverExampleAnimation extends React.Component {
   handleTouchTap = (event) => {
     // This prevents ghost click.
     event.preventDefault();
-
     this.setState({
       open: true,
       anchorEl: event.currentTarget,
     });
   };
-
   handleRequestClose = () => {
     this.setState({
       open: false,
     });
   };
 
-  render() {
+  render () {
     return (
       <div>
         <RaisedButton
-          onTouchTap={this.handleTouchTap}
-          label="Click me"
+          onMouseDown={this.handleTouchTap}
+          label="CATEGORIES"
         />
         <Popover
           open={this.state.open}
@@ -46,13 +45,26 @@ export default class PopoverExampleAnimation extends React.Component {
           animation={PopoverAnimationVertical}
         >
           <Menu>
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Help &amp; feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
+            <MenuItem
+              onClick={() => this.props.filterByCategories(`https://movied.herokuapp.com/categories/27`)
+              }
+              primaryText="ACTION"/>
+            <MenuItem
+              onClick={() => this.props.filterByCategories(`https://movied.herokuapp.com/categories/35`)
+              }
+              primaryText="COMEDY"/>
+            <MenuItem
+              onClick={() => this.props.filterByCategories(`https://movied.herokuapp.com/categories/24`)
+              }
+              primaryText="ADVENTURE"/>
           </Menu>
         </Popover>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  filterByCategories: (id) => dispatch(filterByCategories(id))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(PopoverExampleAnimation);
